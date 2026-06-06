@@ -6,7 +6,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     xivlauncher-core-src = {
-      url = "git+https://github.com/rankynbass/XIVLauncher.Core.git?ref=RB-patched&submodules=1";
+      url = "git+https://github.com/rankynbass/XIVLauncher.Core.git?ref=refs/tags/rb-v1.4.0.7&submodules=1";
       flake = false;
     };
   };

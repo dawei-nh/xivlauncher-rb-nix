@@ -2,7 +2,7 @@
 
 Nix flake packaging for [rankynbass/XIVLauncher.Core](https://github.com/rankynbass/XIVLauncher.Core), also known as XIVLauncher-RB.
 
-The package follows the upstream `RB-patched` branch and fetches submodules so the shared `FFXIVQuickLauncher` sources are available during the .NET build.
+The package follows the newest stable upstream `rb-v*` release tag and fetches submodules so the shared `FFXIVQuickLauncher` sources are available during the .NET build.
 
 ## Usage
 
@@ -67,7 +67,7 @@ Repeat this whenever upstream changes its NuGet dependency graph.
 
 ## Updating upstream
 
-The flake tracks the upstream source as a flake input named `xivlauncher-core-src`. To update it manually:
+The flake tracks the upstream source as a flake input named `xivlauncher-core-src`. To update it to the newest stable `rb-v*` release tag:
 
 ```bash
 ./scripts/update.sh

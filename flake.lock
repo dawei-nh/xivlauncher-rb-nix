@@ -61,7 +61,7 @@
       "locked": {
         "lastModified": 1780194850,
         "narHash": "sha256-ErTNmxnHJyzeJBvVWHi+8MiU6HgsWojsWxdg12yBorA=",
-        "ref": "RB-patched",
+        "ref": "refs/tags/rb-v1.4.0.7",
         "rev": "26db31a364da7c0be481eeb17d5aea9ea540d461",
         "revCount": 672,
         "submodules": true,
@@ -69,7 +69,7 @@
         "url": "https://github.com/rankynbass/XIVLauncher.Core.git"
       },
       "original": {
-        "ref": "RB-patched",
+        "ref": "refs/tags/rb-v1.4.0.7",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/rankynbass/XIVLauncher.Core.git"
