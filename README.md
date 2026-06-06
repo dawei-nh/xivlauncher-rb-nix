@@ -9,20 +9,20 @@ The package follows the upstream `RB-patched` branch and fetches submodules so t
 Run directly:
 
 ```bash
-nix run github:YOUR_GITHUB_USER/xivlauncher-rb-nix
+nix run github:dawei-nh/xivlauncher-rb-nix
 ```
 
 Install into a profile:
 
 ```bash
-nix profile install github:YOUR_GITHUB_USER/xivlauncher-rb-nix
+nix profile install github:dawei-nh/xivlauncher-rb-nix
 ```
 
 Use from another flake:
 
 ```nix
 {
-  inputs.xivlauncher-rb-nix.url = "github:YOUR_GITHUB_USER/xivlauncher-rb-nix";
+  inputs.xivlauncher-rb-nix.url = "github:dawei-nh/xivlauncher-rb-nix";
 
   outputs = { nixpkgs, xivlauncher-rb-nix, ... }:
     let
@@ -55,7 +55,7 @@ nix build .#xivlauncher-rb
 
 ### Regenerating NuGet dependencies
 
-`buildDotnetModule` needs a checked-in NuGet dependency file. This repository starts with a bootstrap `deps.json`; after locking the flake inputs, generate the real dependency set with:
+`buildDotnetModule` needs a checked-in NuGet dependency file. Regenerate the dependency set with:
 
 ```bash
 nix build .#xivlauncher-rb.fetch-deps
