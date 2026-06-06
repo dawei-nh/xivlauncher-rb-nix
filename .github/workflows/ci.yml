@@ -1,0 +1,47 @@
+name: Nix CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+
+      - name: Test updater script
+        run: bash tests/update.sh
+
+      - name: Check shell syntax
+        run: bash -n scripts/update.sh tests/update.sh
+
+      - name: Check flake
+        run: nix flake check
+
+      - name: Build package
+        run: nix build .#xivlauncher-rb --out-link result-package
+
+      - name: Inspect package output
+        run: |
+          test -x result-package/bin/xivlauncher-rb
+          test -x result-package/bin/XIVLauncher.Core
+          find -L result-package -maxdepth 3 -type f | sort

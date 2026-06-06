@@ -68,3 +68,15 @@ if [[ "$actual" != "$expected" ]]; then
   printf 'unexpected nix calls:\n%s\n' "$actual" >&2
   exit 1
 fi
+
+: > "$NIX_CALLS"
+UPDATE_VERIFY=0 "$repo_root/scripts/update.sh"
+
+expected_without_verify='flake lock --override-input xivlauncher-core-src git+https://github.com/rankynbass/XIVLauncher.Core.git?ref=refs/tags/rb-v1.4.0.10&submodules=1
+build .#xivlauncher-rb.fetch-deps'
+
+actual="$(cat "$NIX_CALLS")"
+if [[ "$actual" != "$expected_without_verify" ]]; then
+  printf 'unexpected nix calls without verification:\n%s\n' "$actual" >&2
+  exit 1
+fi
