@@ -31,8 +31,11 @@ jobs:
       - name: Test workflow automation
         run: bash tests/workflows.sh
 
+      - name: Test Dependabot configuration
+        run: bash tests/dependabot.sh
+
       - name: Check shell syntax
-        run: bash -n scripts/update.sh tests/update.sh tests/workflows.sh
+        run: bash -n scripts/update.sh tests/update.sh tests/workflows.sh tests/dependabot.sh
 
       - name: Check flake
         run: nix flake check
