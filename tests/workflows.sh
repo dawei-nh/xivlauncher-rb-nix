@@ -16,9 +16,15 @@ grep -Fq 'GH_TOKEN: ${{ github.token }}' "$update_workflow"
 grep -Fq 'gh pr merge "$pr" --auto --squash --delete-branch' "$update_workflow"
 ! grep -Rq "UPDATE_BOT_TOKEN" .github README.md
 
-! grep -Fq "push:" "$ci_workflow"
+grep -Fq "push:" "$ci_workflow"
+grep -Fq "branches:" "$ci_workflow"
+grep -Fq -- "- main" "$ci_workflow"
 grep -Fq "concurrency:" "$ci_workflow"
 grep -Fq "group: nix-ci-\${{ github.event.pull_request.number || github.ref }}" "$ci_workflow"
 grep -Fq "cancel-in-progress: true" "$ci_workflow"
+grep -Fq "Run actionlint" "$ci_workflow"
+grep -Fq "nix shell nixpkgs#actionlint -c actionlint" "$ci_workflow"
+grep -Fq "Run yamllint" "$ci_workflow"
+grep -Fq "nix shell nixpkgs#yamllint -c yamllint -d relaxed .github" "$ci_workflow"
 grep -Fq "Allow GitHub Actions to create and approve pull requests" README.md
 grep -Fq "Allow auto-merge" README.md
