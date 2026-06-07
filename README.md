@@ -74,3 +74,11 @@ The flake tracks the upstream source as a flake input named `xivlauncher-core-sr
 ```
 
 That script updates the upstream source lock, regenerates NuGet dependencies, and verifies the package build when Nix is available.
+
+### Automated updates
+
+GitHub Actions checks for upstream updates nightly. When a newer stable `rb-v*` release tag is available, the workflow opens or updates an `automation/update-xivlauncher-rb` pull request with refreshed `flake.lock` and `deps.json`.
+
+The update workflow uses `UPDATE_VERIFY=0 ./scripts/update.sh` so it only updates lock files. The pull request CI workflow is the validation gate and runs the package build before GitHub auto-merges the update PR.
+
+For fully automatic update PRs, enable the repository settings named `Allow GitHub Actions to create and approve pull requests` and `Allow auto-merge`. The workflow uses the built-in `GITHUB_TOKEN`; no bot token is required.

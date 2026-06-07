@@ -4,6 +4,7 @@ set -euo pipefail
 readonly UPSTREAM_INPUT="xivlauncher-core-src"
 readonly UPSTREAM_REPO="https://github.com/rankynbass/XIVLauncher.Core.git"
 readonly PACKAGE="xivlauncher-rb"
+readonly UPDATE_VERIFY="${UPDATE_VERIFY:-1}"
 
 log() {
   printf '[update] %s\n' "$*"
@@ -41,6 +42,12 @@ main() {
   nix build ".#${PACKAGE}.fetch-deps"
   ./result deps.json
   rm -f result
+
+  if [[ "${UPDATE_VERIFY}" == "0" ]]; then
+    log "skipping package build and flake check because UPDATE_VERIFY=0"
+    log "done"
+    return
+  fi
 
   log "building ${PACKAGE}"
   nix build ".#${PACKAGE}"
