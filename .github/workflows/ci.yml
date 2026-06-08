@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -40,6 +43,12 @@ jobs:
 
       - name: Check shell syntax
         run: bash -n scripts/update.sh tests/update.sh tests/workflows.sh tests/dependabot.sh
+
+      - name: Run actionlint
+        run: nix shell nixpkgs#actionlint -c actionlint
+
+      - name: Run yamllint
+        run: nix shell nixpkgs#yamllint -c yamllint -d relaxed .github
 
       - name: Check flake
         run: nix flake check
