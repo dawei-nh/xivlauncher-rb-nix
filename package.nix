@@ -7,6 +7,7 @@
 , makeWrapper
 , aria2
 , zstd
+, steam
 , sdl3
 , libdecor
 , libsecret
@@ -15,6 +16,7 @@
 , libunwind
 , gst_all_1
 , xivlauncher-core-src
+, useSteamRun ? true
 }:
 
 let
@@ -66,7 +68,23 @@ buildDotnetModule rec {
     cp src/XIVLauncher.Core/Resources/logo.png "$out/share/pixmaps/xivlauncher-rb.png"
   '';
 
-  postFixup = ''
+  postFixup =
+    lib.optionalString useSteamRun (
+      let
+        steam-run =
+          (steam.override {
+            extraPkgs = pkgs: [ pkgs.libunwind ];
+            extraProfile = ''
+              unset TZ
+            '';
+          }).run;
+      in
+      ''
+        substituteInPlace "$out/bin/XIVLauncher.Core" \
+          --replace-fail 'exec' 'exec ${steam-run}/bin/steam-run'
+      ''
+    )
+    + ''
     wrapProgram "$out/bin/XIVLauncher.Core" \
       --prefix PATH : "${lib.makeBinPath [ aria2 zstd ]}" \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libunwind ]}" \
