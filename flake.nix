@@ -30,6 +30,14 @@
       let
         pkgs = import nixpkgs {
           inherit system;
+          config.allowUnfreePredicate = pkg:
+            builtins.elem (nixpkgs.lib.getName pkg) [
+              "steam"
+              "steam-original"
+              "steam-run"
+              "steam-runtime"
+              "steam-unwrapped"
+            ];
           overlays = [ overlay ];
         };
       in
