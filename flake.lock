@@ -59,11 +59,11 @@
     "xivlauncher-core-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1787708281,
-        "narHash": "sha256-gKBcZh3Kt3nhENQNCg1dIBFxb18rvtEubrYTngdEjuA=",
-        "ref": "refs/tags/rb-v1.4.0.10",
-        "rev": "d0b5c53342cd876fdc6d242b68eaa570344feb69",
-        "revCount": 696,
+        "lastModified": 1788584614,
+        "narHash": "sha256-nDcgHXjuIst8v8QD1oCl+Z5Fvi5M+WFv9RDd/kBSo6s=",
+        "ref": "refs/tags/rb-v1.4.0.12",
+        "rev": "67b57982e971c8e92ef34604728d45edf0ca9a6f",
+        "revCount": 700,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/rankynbass/XIVLauncher.Core.git"
